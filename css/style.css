@@ -122,11 +122,20 @@ h3 {
     border-radius: 105px;
     margin-top: 35px;
     background-image: radial-gradient(var(--slate), #5b414f55);
+    display: block;
+}
+
+.addBtn:hover {
+    box-shadow: 1px 1px 25px var(--l-acc);
 }
 
 .addBtn img {
     height: 170px;
     width: 170px;
+}
+
+.addBtn img:hover {
+    cursor: pointer;
 }
 /* ========== new book form ========== */
 .addForm {
@@ -135,6 +144,7 @@ h3 {
     border-radius: 10px;
     padding: 10px;
     color: var(--l-acc);
+    display: none;
 }
 
 form#newBook {
@@ -159,6 +169,13 @@ form#newBook {
     padding: 5px;
 }
 
+#newBook button:hover {
+    cursor: pointer;
+    color: var(--l-acc);
+    background-color: var(--jet);
+    box-shadow: 1px 1px 6px var(--l-acc);
+}
+
 #formRead {
     display: flex;
     justify-content: center;
@@ -169,6 +186,8 @@ form#newBook {
 
 #formRead div {
     padding: 0px 20px;
+    display: flex;
+    gap: 10px;
 }
 
 /* ========== sidebar stats ========== */

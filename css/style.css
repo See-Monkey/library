@@ -173,7 +173,7 @@ form#newBook {
     cursor: pointer;
     color: var(--l-acc);
     background-color: var(--jet);
-    box-shadow: 1px 1px 6px var(--l-acc);
+    box-shadow: 1px 1px 10px var(--l-acc);
 }
 
 #formRead {

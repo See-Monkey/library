@@ -282,6 +282,13 @@ form#newBook {
 .cardIcons .checked {
     margin-right: 40px;
 }
+
+.cardIcons .checked:hover,
+.cardIcons .edit:hover,
+.cardIcons .delete:hover {
+    cursor: pointer;
+    border-bottom: 4px solid var(--l-acc);
+}
 /* ========== footer ========== */
 .footer {
     background-color: #5b414fdd;

@@ -11,10 +11,11 @@ let numPagesRead = 0;
 let numPagesUnread = 0;
 
 const container = document.querySelector(".container");
+const library = document.querySelector(".library");
 
 // ========== object constructor ========== //
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
     if (!new.target) {
         throw Error("You must use the 'new' operator")
     }
@@ -22,6 +23,7 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.id = id;
 
     this.info = function() {
         return `${title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`
@@ -30,8 +32,8 @@ function Book(title, author, pages, read) {
 
 // ========== functions ========== //
 
-function addBook(title, author, pages, read) {
-    const add = new Book(title, author, pages, read);
+function addBook(title, author, pages, read, id) {
+    const add = new Book(title, author, pages, read, id);
     books.push(add);
 }
 
@@ -50,7 +52,35 @@ function toggleForm() {
     }
 }
 
-//submit form, add book
+function clearForm() {
+    const formTitle = document.querySelector("#formTitle");
+    const formAuthor = document.querySelector("#formAuthor");
+    const formPages = document.querySelector("#formPages");
+    const formRead = document.querySelector("input[name='fRead']:checked");
+
+    formTitle.value = "";
+    formAuthor.value = "";
+    formPages.value = "";
+    formRead.checked = false;
+}
+
+//submit form, add book -- need to add crypto id
+function submitBook () {
+    const formTitle = document.querySelector("#formTitle");
+    const formAuthor = document.querySelector("#formAuthor");
+    const formPages = document.querySelector("#formPages");
+    const formRead = document.querySelector("input[name='fRead']:checked");
+    let formReadBool = null;
+    if (formRead.value === "true") {
+        formReadBool = true;
+    } else if (formRead.value === "false") {
+        formReadBool = false;
+    }
+    addBook(formTitle.value, formAuthor.value, Number(formPages.value), formReadBool, crypto.randomUUID());
+    redrawScreen();
+    clearForm();
+    toggleForm();
+}
 
 function calcStats() {
     const booksRead = books.filter(book => book.read === true);
@@ -79,7 +109,6 @@ function redrawStats() {
     statsPagesUnread.textContent = numPagesUnread;
 }
 
-//draw book
 function drawBook(book) {
     const library = document.querySelector(".library");
 
@@ -171,9 +200,15 @@ function drawBook(book) {
     library.appendChild(cardOuter);
 }
 
-//redraw books
+function redrawBooks() {
+    library.innerHTML = "";
+    books.forEach(book => drawBook(book));
+}
 
-//redraw screen
+function redrawScreen() {
+    redrawBooks();
+    redrawStats();
+}
 
 //toggle read status
 
@@ -193,7 +228,7 @@ container.addEventListener("click", (e) => {
             toggleForm();
             break;
         case "submitBook":
-            toggleForm(); //later, change this to submitForm and let that function toggle form
+            submitBook(); //later, change this to submitForm and let that function toggle form
             break;
     }
 });
@@ -205,17 +240,16 @@ container.addEventListener("click", (e) => {
 
 // ========== functionality testing ========== //
 
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true, crypto.randomUUID());
 books.push(theHobbit); //declare new book object, push it to arry
 
-addBook("Shameless", "Bryan Tyler Cohen", 173, false);
+addBook("Shameless", "Bryan Tyler Cohen", 173, false, crypto.randomUUID());
     //add book straight into array as function
 
-addBook("A Game of Thrones", "George R.R. Martin", 807, true);
+addBook("A Game of Thrones", "George R.R. Martin", 807, true, crypto.randomUUID());
 
-// toggleForm();
-redrawStats();
 
-drawBook(books[0]);
+
+redrawScreen();
 
 console.log(books);

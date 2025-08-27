@@ -218,9 +218,19 @@ function redrawScreen() {
     redrawStats();
 }
 
-//toggle read status
 function toggleRead(id) {
-    console.log(id);
+    const card = document.getElementById(id);
+    const img = card.querySelector("img#checked");
+
+    const index = books.findIndex(book => book.id === id);
+    if (books[index].read === true) {
+        books[index].read = false;
+        img.src = "./img/unchecked.svg";
+    } else if (books[index].read === false) {
+        books[index].read = true;
+        img.src = "./img/checked.svg";
+    }
+    redrawStats();
 }
 
 //toggle edit mode
@@ -228,12 +238,16 @@ function toggleRead(id) {
 //submit edits
 
 //delete book
+function deleteBook() {
+    
+}
 
 // ========== event listeners ========== //
 
 //click
 container.addEventListener("click", (e) => {
     let target = e.target;
+    let targetID = "";
     switch(target.id) {
         case "addBtn":
             toggleForm();
@@ -242,13 +256,16 @@ container.addEventListener("click", (e) => {
             submitBook(); //later, change this to submitForm and let that function toggle form
             break;
         case "checked":
-            console.log("check clicked");
+            targetID = target.parentNode.parentNode.parentNode.parentNode.id;
+            toggleRead(targetID);
             break;
         case "edit":
-            console.log("edit clicked");
+            targetID = target.parentNode.parentNode.parentNode.parentNode.id;
+            console.log(targetID);
             break;
         case "delete":
-            console.log("delete clicked");
+            targetID = target.parentNode.parentNode.parentNode.parentNode.id;
+            deleteBook(targetID);
             break;
     }
 });

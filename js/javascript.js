@@ -64,7 +64,6 @@ function clearForm() {
     formRead.checked = false;
 }
 
-//submit form, add book -- need to add crypto id
 function submitBook () {
     const formTitle = document.querySelector("#formTitle");
     const formAuthor = document.querySelector("#formAuthor");
@@ -110,10 +109,12 @@ function redrawStats() {
 }
 
 function drawBook(book) {
+    const bookID = book.id;
     const library = document.querySelector(".library");
 
     const cardOuter = document.createElement("div");
     cardOuter.classList.add("cardOuter");
+    cardOuter.id = bookID;
 
     const cardInner = document.createElement("div");
     cardInner.classList.add("cardInner");
@@ -155,13 +156,16 @@ function drawBook(book) {
 
     const divActionChecked = document.createElement("div");
     divActionChecked.classList.add("cardAction", "checked");
+    divActionChecked.id = "checked";
     divCardIcons.appendChild(divActionChecked);
 
     const paraRead = document.createElement("p");
+    paraRead.id = "checked";
     paraRead.textContent = "Read";
     divActionChecked.appendChild(paraRead);
 
     const imgRead = document.createElement("img");
+    imgRead.id = "checked";
     if (book.read === true) {
         imgRead.alt = "checked icon";
         imgRead.src = "./img/checked.svg";
@@ -176,10 +180,12 @@ function drawBook(book) {
     divCardIcons.appendChild(divActionEdit);
 
     const paraEdit = document.createElement("p");
+    paraEdit.id = "edit";
     paraEdit.textContent = "Edit";
     divActionEdit.appendChild(paraEdit);
 
     const imgEdit = document.createElement("img");
+    imgEdit.id = "edit";
     imgEdit.alt = "edit icon";
     imgEdit.src = "./img/edit.svg";
     divActionEdit.appendChild(imgEdit);
@@ -189,10 +195,12 @@ function drawBook(book) {
     divCardIcons.appendChild(divActionDelete);
 
     const paraDelete = document.createElement("p");
+    paraDelete.id = "delete";
     paraDelete.textContent = "Delete";
     divActionDelete.appendChild(paraDelete);
 
     const imgDelete = document.createElement("img");
+    imgDelete.id = "delete";
     imgDelete.alt = "delete icon";
     imgDelete.src = "./img/delete.svg";
     divActionDelete.appendChild(imgDelete);
@@ -211,6 +219,9 @@ function redrawScreen() {
 }
 
 //toggle read status
+function toggleRead(id) {
+    console.log(id);
+}
 
 //toggle edit mode
 
@@ -229,6 +240,15 @@ container.addEventListener("click", (e) => {
             break;
         case "submitBook":
             submitBook(); //later, change this to submitForm and let that function toggle form
+            break;
+        case "checked":
+            console.log("check clicked");
+            break;
+        case "edit":
+            console.log("edit clicked");
+            break;
+        case "delete":
+            console.log("delete clicked");
             break;
     }
 });

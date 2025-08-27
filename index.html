@@ -21,10 +21,50 @@
                 <img src="./img/plus.svg" alt="add icon">
             </div>
             <div class="addForm">
-
+                <h3>Add New Book</h3>
+                <form id="newBook" action="" method="post">
+                    <label for="formTitle">Title:</label>
+                    <input type="text" id="formTitle" name="fTitle" placeholder="title">
+                    <label for="formAuthor">Author:</label>
+                    <input type="text" id="formTitle" name="fAuthor" placeholder="author">
+                    <label for="formPages">Pages:</label>
+                    <input type="number" id="formTitle" name="fPages" size="5" placeholder="000">
+                    <fieldset id="formRead">
+                        <legend>Already read?</legend>
+                        <div class="radioYes">
+                            <input type="radio" name="fRead" id="formTrue" value="true">
+                            <label for="formTrue">Yes</label>
+                        </div>
+                        <div class="radioNo">
+                            <input type="radio" name="fRead" id="formFalse" value="false">
+                            <label for="formFalse">No</label>
+                        </div>
+                    </fieldset>
+                    <button id="submitBook" type="button">Add</button>
+                </form>
             </div>
-            <div class="stats">
-
+            <div class="statsBox">
+                <h3>Stats</h3>
+                <div class="stats numBooks">
+                    <span class="numBooks">8</span>
+                    <p> Books</p>
+                </div>
+                <div class="stats numRead">
+                    <span class="numRead">6</span>
+                    <p> Read</p>
+                </div>
+                <div class="stats numUnread">
+                    <span class="numUnread">2</span>
+                    <p> Unread</p>
+                </div>
+                <div class="stats numPagesRead">
+                    <span class="numPagesRead">987</span>
+                    <p> Pages Read</p>
+                </div>
+                <div class="stats numPagesUnread">
+                    <span class="numPagesUnread">247</span>
+                    <p> Pages To Go</p>
+                </div>
             </div>
         </div>
         <div class="library">
@@ -34,7 +74,7 @@
                     <input type="text" id="cardAuthor" value="George R.R. Martin" disabled />
                     <div class="pages">
                         <input type="text" id="cardPages" size="5" value="807" disabled />
-                        <label for "cardPages"> pages</label>
+                        <label for="cardPages"> pages</label>
                     </div>
                     <div class="cardIcons">
                         <div class="cardAction checked">

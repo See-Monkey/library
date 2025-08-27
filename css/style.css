@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
     background-color: var(--jet);
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -65,7 +65,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     display: grid;
-    grid-template-rows: 300px 1fr 50px;
+    grid-template-rows: 280px 1fr 50px;
     grid-template-columns: 300px 4fr;
 }
 /* ========== header ========== */
@@ -101,23 +101,99 @@ body {
 .sidebar {
     background-color: #262927dd;
     grid-area: 2/1/3/2;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+h3 {
+    font-size: 20px;
+    margin: 10px;
+    text-align: center;
+    border-bottom: 2px solid var(--jet);
 }
 
 .addBtn {
     height: 180px;
     width: 180px;
+    align-self: center;
     border: 6px solid black;
     border-radius: 105px;
     margin-top: 35px;
-    background-image: radial-gradient(#dcd0d7ee, #26292722);
+    background-image: radial-gradient(var(--slate), #5b414f55);
 }
 
 .addBtn img {
     height: 170px;
     width: 170px;
+}
+/* ========== new book form ========== */
+.addForm {
+    margin: 20px;
+    background-color: var(--slate);
+    border-radius: 10px;
+    padding: 10px;
+    color: var(--l-acc);
+}
+
+form#newBook {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#newBook input {
+    padding: 0px 20px;
+    background-color: var(--l-acc);
+}
+
+#newBook button {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    background-color: var(--l-acc);
+    border-radius: 4px;
+    box-shadow: 4px 4px 8px var(--jet);
+    padding: 5px;
+}
+
+#formRead {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 0px;
+    border: none;
+}
+
+#formRead div {
+    padding: 0px 20px;
+}
+
+/* ========== sidebar stats ========== */
+
+.statsBox {
+    margin: 20px;
+    background-color: var(--slate);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    color: var(--l-acc);
+}
+
+.stats span {
+    width: 110px;
+    text-align: right;
+    font-size: 20px;
+}
+
+.stats {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
 }
 /* ========== library ========== */
 .library {
@@ -164,19 +240,19 @@ body {
 .pages {
     display: flex;
     gap: 10px;
-    color: var(--silver);
+    color: var(--l-acc);
 }
 
 .cardInner input:disabled {
     background-color: #262927dd;
-    color: var(--silver);
+    color: var(--l-acc);
 }
 
 .cardIcons {
     align-self: flex-end;
     display: flex;
     justify-content: flex-end;
-    color: var(--silver);
+    color: var(--l-acc);
 }
 
 .cardIcons img {

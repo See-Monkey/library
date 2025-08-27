@@ -1,3 +1,4 @@
+/* ========== reset ========== */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -33,6 +34,48 @@ h1, h2, h3, h4, h5, h6 {
 #root, #__next {
   isolation: isolate;
 }
+/* ========== global ========== */
 :root {
-    /*global*/
+    --jet: #262927;
+    --slate: #5b414f;
+    --silver: #dcd0d7;
+    --l-acc: #daf0ee;
+    --l-green: #5bc27c;
+    --green: #2c7744;
+    --l-red: #ba4f4f;
+    --red: #781717;
+}
+
+body {
+    background-color: var(--slate);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-image: url("../img/will-van-wingerden-dsvJgiBJTOs-unsplash.jpg");
+    width: min(100%, 1800px);
+    height: min(100%, 1600px);
+    background-size: auto auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* ========== header ========== */
+.header {
+
+}
+/* ========== sidebar ========== */
+.sidebar {
+
+}
+/* ========== library ========== */
+.library {
+
+}
+/* ========== footer ========== */
+.footer {
+    
 }

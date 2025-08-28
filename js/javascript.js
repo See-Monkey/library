@@ -15,7 +15,7 @@ const library = document.querySelector(".library");
 
 // ========== object constructor ========== //
 
-function Book(title, author, pages, read, id) {
+function Book(title, author, pages, read) {
     if (!new.target) {
         throw Error("You must use the 'new' operator")
     }
@@ -23,7 +23,7 @@ function Book(title, author, pages, read, id) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.id = id;
+    this.id = crypto.randomUUID();
     this.edit = false;
 
     this.info = function() {
@@ -41,8 +41,8 @@ function Book(title, author, pages, read, id) {
 
 // ========== functions ========== //
 
-function addBook(title, author, pages, read, id) {
-    const add = new Book(title, author, pages, read, id);
+function addBook(title, author, pages, read) {
+    const add = new Book(title, author, pages, read);
     books.push(add);
 }
 
@@ -90,7 +90,7 @@ function submitBook () {
         } else if (formRead.value === "false") {
             formReadBool = false;
         }
-        addBook(formTitle.value, formAuthor.value, Number(formPages.value), formReadBool, crypto.randomUUID());
+        addBook(formTitle.value, formAuthor.value, Number(formPages.value), formReadBool);
         redrawScreen();
         clearForm();
         toggleForm();

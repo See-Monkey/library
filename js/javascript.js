@@ -24,9 +24,18 @@ function Book(title, author, pages, read, id) {
     this.pages = pages;
     this.read = read;
     this.id = id;
+    this.edit = false;
 
     this.info = function() {
         return `${title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`
+    }
+
+    this.toggleReadStatus = function() {
+        if (this.read === true) {
+            this.read = false;
+        } else if (this.read === false) {
+            this.read = true;
+        }
     }
 }
 
@@ -224,22 +233,87 @@ function toggleRead(id) {
 
     const index = books.findIndex(book => book.id === id);
     if (books[index].read === true) {
-        books[index].read = false;
         img.src = "./img/unchecked.svg";
     } else if (books[index].read === false) {
-        books[index].read = true;
         img.src = "./img/checked.svg";
     }
+    books[index].toggleReadStatus();
     redrawStats();
 }
 
-//toggle edit mode
+function toggleEdit(id) {
+    const index = books.findIndex(book => book.id === id);
+    if (books[index].edit === false) {
+        editOn(id);
+    } else if (books[index].edit === true) {
+        submitEdits(id);
+    }
+}
 
-//submit edits
+function editOn(id) {
+    const index = books.findIndex(book => book.id === id);
+    books[index].edit = true;
 
-//delete book
-function deleteBook() {
-    
+    const card = document.getElementById(id);
+    const edit = card.querySelector(".edit");
+    edit.style.borderBottom = "4px solid var(--l-acc)";
+
+    const title = card.querySelector("#cardTitle");
+    const author = card.querySelector("#cardAuthor");
+    const pages = card.querySelector("#cardPages");
+
+    title.disabled = false;
+    author.disabled = false;
+    pages.disabled = false;
+}
+
+function submitEdits(id) {
+    const index = books.findIndex(book => book.id === id);
+    const card = document.getElementById(id);
+    const title = card.querySelector("#cardTitle");
+    const author = card.querySelector("#cardAuthor");
+    const pages = card.querySelector("#cardPages");
+
+    if (title.value.length > 0 &&
+        author.value.length > 0 &&
+        Number.isInteger(Number(pages.value))) {
+            books[index].title = title.value;
+            books[index].author = author.value;
+            books[index].pages = Number(pages.value);
+            redrawStats();
+            editOff(id);
+    } else if (title.value.length <= 0) {
+        alert("Title must not be blank.");
+    } else if (author.value.length <= 0) {
+        alert("Author must not be blank.");
+    } else if (!Number.isInteger(Number(pages.value))) {
+        alert("Pages must be a whole number.");
+    } 
+}
+
+function editOff(id) {
+    const index = books.findIndex(book => book.id === id);
+    books[index].edit = false;
+
+    const card = document.getElementById(id);
+    const edit = card.querySelector(".edit");
+    edit.style.removeProperty("border-bottom");
+
+    const title = card.querySelector("#cardTitle");
+    const author = card.querySelector("#cardAuthor");
+    const pages = card.querySelector("#cardPages");
+
+    title.disabled = true;
+    author.disabled = true;
+    pages.disabled = true;
+}
+
+function deleteBook(id) {
+    const card = document.getElementById(id);
+    card.remove();
+    const index = books.findIndex(book => book.id === id);
+    books.splice(index, 1);
+    redrawStats();
 }
 
 // ========== event listeners ========== //
@@ -261,7 +335,7 @@ container.addEventListener("click", (e) => {
             break;
         case "edit":
             targetID = target.parentNode.parentNode.parentNode.parentNode.id;
-            console.log(targetID);
+            toggleEdit(targetID);
             break;
         case "delete":
             targetID = target.parentNode.parentNode.parentNode.parentNode.id;
@@ -288,5 +362,3 @@ addBook("A Game of Thrones", "George R.R. Martin", 807, true, crypto.randomUUID(
 
 
 redrawScreen();
-
-console.log(books);

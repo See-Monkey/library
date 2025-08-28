@@ -364,14 +364,12 @@ container.addEventListener("click", (e) => {
 
 // ========== functionality testing ========== //
 
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true, crypto.randomUUID());
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 books.push(theHobbit); //declare new book object, push it to arry
 
-addBook("Shameless", "Bryan Tyler Cohen", 173, false, crypto.randomUUID());
+addBook("Shameless", "Bryan Tyler Cohen", 173, false);
     //add book straight into array as function
 
-addBook("A Game of Thrones", "George R.R. Martin", 807, true, crypto.randomUUID());
-
-
+addBook("A Game of Thrones", "George R.R. Martin", 807, true);
 
 redrawScreen();

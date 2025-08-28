@@ -78,16 +78,34 @@ function submitBook () {
     const formAuthor = document.querySelector("#formAuthor");
     const formPages = document.querySelector("#formPages");
     const formRead = document.querySelector("input[name='fRead']:checked");
-    let formReadBool = null;
-    if (formRead.value === "true") {
-        formReadBool = true;
-    } else if (formRead.value === "false") {
-        formReadBool = false;
+    
+    if (formTitle.value.length > 0 &&
+        formAuthor.value.length > 0 &&
+        Number.isInteger(Number(formPages.value)) &&
+        Number(formPages.value) > 0 &&
+        formRead !== null) {
+        let formReadBool = null;
+        if (formRead.value === "true") {
+            formReadBool = true;
+        } else if (formRead.value === "false") {
+            formReadBool = false;
+        }
+        addBook(formTitle.value, formAuthor.value, Number(formPages.value), formReadBool, crypto.randomUUID());
+        redrawScreen();
+        clearForm();
+        toggleForm();
+
+    } else if (formTitle.value.length <= 0) {
+        alert("Title must not be blank.");
+    } else if (formAuthor.value.length <= 0) {
+        alert("Author must not be blank.");
+    } else if (!Number.isInteger(Number(formPages.value)) ||
+                Number(formPages.value) <= 0) {
+        alert("Pages must be a whole number.");
+    } else if (formRead === null) {
+        alert("Select whether you have already read the book or not.");
     }
-    addBook(formTitle.value, formAuthor.value, Number(formPages.value), formReadBool, crypto.randomUUID());
-    redrawScreen();
-    clearForm();
-    toggleForm();
+
 }
 
 function calcStats() {
@@ -327,7 +345,7 @@ container.addEventListener("click", (e) => {
             toggleForm();
             break;
         case "submitBook":
-            submitBook(); //later, change this to submitForm and let that function toggle form
+            submitBook();
             break;
         case "checked":
             targetID = target.parentNode.parentNode.parentNode.parentNode.id;
@@ -343,11 +361,6 @@ container.addEventListener("click", (e) => {
             break;
     }
 });
-
-//keyup (for data validation checking)
-
-
-
 
 // ========== functionality testing ========== //
 

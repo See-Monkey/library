@@ -15,22 +15,47 @@ const library = document.querySelector(".library");
 
 // ========== object constructor ========== //
 
-function Book(title, author, pages, read) {
-    if (!new.target) {
-        throw Error("You must use the 'new' operator")
-    }
+// function Book(title, author, pages, read) {
+//     if (!new.target) {
+//         throw Error("You must use the 'new' operator")
+//     }
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+//     this.id = crypto.randomUUID();
+//     this.edit = false;
+
+//     this.info = function() {
+//         return `${title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`
+//     }
+
+//     this.toggleReadStatus = function() {
+//         if (this.read === true) {
+//             this.read = false;
+//         } else if (this.read === false) {
+//             this.read = true;
+//         }
+//     }
+// }
+
+// ===== refactored from object constructor to class ===== //
+
+class Book {
+    constructor(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
     this.id = crypto.randomUUID();
     this.edit = false;
+    }
 
-    this.info = function() {
+    info() {
         return `${title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`
     }
 
-    this.toggleReadStatus = function() {
+    toggleReadStatus() {
         if (this.read === true) {
             this.read = false;
         } else if (this.read === false) {
